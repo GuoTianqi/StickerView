@@ -14,7 +14,9 @@ import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.QuickContactBadge;
 import android.widget.Toast;
 
@@ -51,35 +53,44 @@ public class MainActivity extends AppCompatActivity {
         stickerView.showBorder(false);
         stickerView.showIcons(false);
         stickerView.invalidate();
+
+        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) stickerView.getLayoutParams();
+        if (lp.width == ViewGroup.LayoutParams.MATCH_PARENT) {
+            lp.height = lp.width = (int) (getResources().getDisplayMetrics().density * 300 + 0.5);
+            lp.weight = 0;
+        } else {
+            lp.height = lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            lp.weight = 1;
+        }
+
+        stickerView.requestLayout();
       }
     });
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
     //currently you can config your own icons and icon event
     //the event you can custom
-//    BitmapStickerIcon deleteIcon = new BitmapStickerIcon(ContextCompat.getDrawable(this,
-//            com.xiaopo.flying.sticker.R.drawable.sticker_ic_close_white_18dp),
-//            BitmapStickerIcon.LEFT_TOP);
-//    deleteIcon.setIconEvent(new DeleteIconEvent());
+    BitmapStickerIcon deleteIcon = new BitmapStickerIcon(ContextCompat.getDrawable(this,
+            com.xiaopo.flying.sticker.R.drawable.sticker_ic_close_white_18dp),
+            BitmapStickerIcon.LEFT_TOP);
+    deleteIcon.setIconEvent(new DeleteIconEvent());
 
     BitmapStickerIcon zoomIcon = new BitmapStickerIcon(ContextCompat.getDrawable(this,
             com.xiaopo.flying.sticker.R.drawable.sticker_ic_scale_white_18dp),
             BitmapStickerIcon.RIGHT_BOTOM);
     zoomIcon.setIconEvent(new ZoomIconEvent());
 
-//    BitmapStickerIcon flipIcon = new BitmapStickerIcon(ContextCompat.getDrawable(this,
-//            com.xiaopo.flying.sticker.R.drawable.sticker_ic_flip_white_18dp),
-//            BitmapStickerIcon.RIGHT_TOP);
-//    flipIcon.setIconEvent(new FlipHorizontallyEvent());
+    BitmapStickerIcon flipIcon = new BitmapStickerIcon(ContextCompat.getDrawable(this,
+            com.xiaopo.flying.sticker.R.drawable.sticker_ic_flip_white_18dp),
+            BitmapStickerIcon.RIGHT_TOP);
+    flipIcon.setIconEvent(new FlipHorizontallyEvent());
 
-//    BitmapStickerIcon heartIcon =
-//            new BitmapStickerIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white_24dp),
-//                    BitmapStickerIcon.LEFT_BOTTOM);
-//    heartIcon.setIconEvent(new HelloIconEvent());
+    BitmapStickerIcon heartIcon =
+            new BitmapStickerIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white_24dp),
+                    BitmapStickerIcon.LEFT_BOTTOM);
+    heartIcon.setIconEvent(new HelloIconEvent());
 
-    stickerView.setIcons(Arrays.asList(zoomIcon));
-
-    // stickerView.setIcons(Arrays.asList(deleteIcon, zoomIcon, flipIcon, heartIcon));
+    stickerView.setIcons(Arrays.asList(deleteIcon, zoomIcon, flipIcon, heartIcon));
 
     //default icon layout
     //stickerView.configDefaultIcons();
