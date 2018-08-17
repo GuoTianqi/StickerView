@@ -35,8 +35,8 @@ import java.util.List;
  */
 public class StickerView extends FrameLayout {
 
-  private final boolean showIcons;
-  private final boolean showBorder;
+  private boolean showIcons;
+  private boolean showBorder;
   private final boolean bringToFrontCurrentSticker;
 
   @IntDef({
@@ -130,6 +130,22 @@ public class StickerView extends FrameLayout {
         a.recycle();
       }
     }
+  }
+
+  /**
+   * call {@link #invalidate()} to take effect
+   * @param showBorder
+   */
+  public void showBorder(boolean showBorder) {
+      this.showBorder = showBorder;
+  }
+
+  /**
+   * call {@link #invalidate()} to take effect
+   * @param showIcons
+   */
+  public void showIcons(boolean showIcons) {
+      this.showIcons = showIcons;
   }
 
   public void configDefaultIcons() {
