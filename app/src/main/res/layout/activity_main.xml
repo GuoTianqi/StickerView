@@ -28,7 +28,8 @@
       app:showIcons="true"
       >
 
-    <uk.co.senab.photoview.PhotoView
+    <ImageView
+        android:id="@+id/sourceIv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/haizewang_90"
