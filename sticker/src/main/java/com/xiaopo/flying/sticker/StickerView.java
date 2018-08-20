@@ -573,10 +573,23 @@ public class StickerView extends FrameLayout {
 
   @Override protected void onSizeChanged(int w, int h, int oldW, int oldH) {
     super.onSizeChanged(w, h, oldW, oldH);
+    if ((oldW == 0 || oldH == 0) || (w == oldW && h == oldH)) {
+        return;
+    }
+
     for (int i = 0; i < stickers.size(); i++) {
       Sticker sticker = stickers.get(i);
       if (sticker != null) {
-        transformSticker(sticker);
+          // 如果变化前后图片宽高比等于1:1
+          // 等比缩放贴图，保证缩放后的贴图还在图片原来的位置
+          if (oldW == oldH && w == h) {
+              Matrix matrix = sticker.getMatrix();
+              float scale = w * 1.0f / oldW;
+              matrix.postScale(scale, scale);
+              invalidate();
+          } else {
+              transformSticker(sticker);
+          }
       }
     }
   }
