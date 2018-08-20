@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
   private TextSticker sticker;
   private ImageView sourceIv;
 
+  private boolean big = true;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -55,13 +57,12 @@ public class MainActivity extends AppCompatActivity {
         stickerView.invalidate();
 
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) stickerView.getLayoutParams();
-        if (lp.width == ViewGroup.LayoutParams.MATCH_PARENT) {
-            lp.height = lp.width = (int) (getResources().getDisplayMetrics().density * 300 + 0.5);
-            lp.weight = 0;
+        if (big) {
+            lp.height = lp.width = (int) (getResources().getDisplayMetrics().density * 200 + 0.5);
         } else {
-            lp.height = lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            lp.weight = 1;
+            lp.height = lp.width = (int) (getResources().getDisplayMetrics().density * 350 + 0.5);
         }
+          big = !big;
 
         stickerView.requestLayout();
       }

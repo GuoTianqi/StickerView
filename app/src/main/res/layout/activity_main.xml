@@ -20,10 +20,9 @@
 
   <com.xiaopo.flying.sticker.StickerView
       android:id="@+id/sticker_view"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
+      android:layout_width="350dp"
+      android:layout_height="350dp"
       android:layout_gravity="center"
-      android:layout_weight="1"
       app:showBorder="true"
       app:showIcons="true"
       >
